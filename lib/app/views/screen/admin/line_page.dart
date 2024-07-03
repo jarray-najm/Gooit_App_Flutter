@@ -29,9 +29,21 @@ class _LinesViewState extends State<LinesView> {
   @override
   void initState() {
     super.initState();
-    _futureLines = _controller.getAllLines();
-    _fetchAllStations();
-    // Fetch all stations when widget initializes
+    _fetchLines(); // Initiate fetching lines
+    _fetchAllStations(); // Fetch all stations when widget initializes
+  }
+
+  Future<void> _fetchLines() async {
+    try {
+      List<Line> lines = await _controller.getAllLines();
+      setState(() {
+        _futureLines =
+            Future.value(lines); // Update _futureLines with fetched lines
+      });
+    } catch (e) {
+      // Handle error
+      print('Failed to fetch lines: $e');
+    }
   }
 
   Future<void> _fetchAllStations() async {
@@ -235,6 +247,7 @@ class _LinesViewState extends State<LinesView> {
                               // Add the new line via your controller
                               try {
                                 await _controller.addLine(newLine);
+                                await _controller.getAllLines();
                                 // Optionally update _futureLines to refresh the list
                                 setState(() {
                                   _futureLines = _controller.getAllLines();
@@ -484,13 +497,15 @@ class _LinesViewState extends State<LinesView> {
                                     try {
                                       await _controller.editLine(
                                           lineToEdit.id, updatedLine);
+                                      await _controller.getAllLines();
                                       // Optionally update _futureLines to refresh the list
+                                      _futureLines = _controller.getAllLines();
+                                      await _fetchLines();
                                       setState(() {
                                         _futureLines =
                                             _controller.getAllLines();
                                       });
-                                      Navigator.of(context)
-                                          .pop(); // Close the dialog
+                                      Navigator.of(context).pop();
                                     } catch (e) {
                                       print('Failed to edit line: $e');
                                       // Handle error
@@ -603,7 +618,11 @@ class _LinesViewState extends State<LinesView> {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
                       List<Line>? lines = snapshot.data;
-                      List<Line> filteredLines = lines!.where((line) {
+                      if (lines == null || lines.isEmpty) {
+                        return Center(child: Text('No lines available.'));
+                      }
+
+                      List<Line> filteredLines = lines.where((line) {
                         return line.lineName
                                 .toLowerCase()
                                 .contains(_filterText) ||

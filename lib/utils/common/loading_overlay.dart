@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:goo_it/utils/common/app_colors.dart';
+
 import '../../../../utils/common/text_style_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -75,7 +77,7 @@ class LoadingScreen {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SpinKitFadingCircle(color: colorScheme.primary, size: 60),
+                  SpinKitFadingCircle(color: AppColors.seedColor, size: 60),
                   StreamBuilder<String>(
                     stream: textController.stream,
                     builder: (context, snapshot) {

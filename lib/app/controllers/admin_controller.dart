@@ -8,7 +8,6 @@ import '../models/user_model.dart';
 class AdminController {
   static const String baseUrl =
       'https://gooit-app-backend.onrender.com/api/v1/admin/';
-
   Future<List<User>> getAllUsers() async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/users'));
@@ -59,30 +58,40 @@ class AdminController {
 
   Future<void> addStation(Station station) async {
     try {
+      print('Adding Station: ${station.toJson()}');
       final response = await http.post(
         Uri.parse('$baseUrl/stations'),
         headers: {"Content-Type": "application/json"},
         body: json.encode(station.toJson()),
       );
+      print('Request Body: ${json.encode(station.toJson())}');
+      print('Response Status: ${response.statusCode}');
+      print('Response Body: ${response.body}');
       if (response.statusCode != 201) {
-        throw Exception('Failed to add station');
+        throw Exception('Failed to add station: ${response.body}');
       }
     } catch (e) {
+      print('Error: $e');
       throw Exception('Failed to add station: $e');
     }
   }
 
   Future<void> editStation(int id, Station station) async {
     try {
+      print('Editing Station with ID $id: ${station.toJson()}');
       final response = await http.put(
         Uri.parse('$baseUrl/stations/$id'),
         headers: {"Content-Type": "application/json"},
         body: json.encode(station.toJson()),
       );
+      print('Request Body: ${json.encode(station.toJson())}');
+      print('Response Status: ${response.statusCode}');
+      print('Response Body: ${response.body}');
       if (response.statusCode != 200) {
-        throw Exception('Failed to edit station');
+        throw Exception('Failed to edit station: ${response.body}');
       }
     } catch (e) {
+      print('Error: $e');
       throw Exception('Failed to edit station: $e');
     }
   }

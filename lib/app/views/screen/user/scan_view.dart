@@ -411,7 +411,7 @@ class _ScanViewState extends State<ScanView> {
                                   fixedSize: const Size(double.infinity, 50),
                                 ),
                                 child: const Text(
-                                  "Make Payment",
+                                  "Go To Payment",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w900,
                                       color: AppColors.whiteColor),

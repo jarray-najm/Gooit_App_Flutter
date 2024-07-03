@@ -180,6 +180,7 @@ class _StationsViewState extends State<StationsView> {
             nameStation: '',
             codeStation: '',
             addresseStation: '',
+            id: 0,
           ));
         },
       );
