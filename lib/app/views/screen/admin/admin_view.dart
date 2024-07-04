@@ -28,8 +28,6 @@ class _AdminViewState extends State<AdminView> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.sizeOf(context);
     final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
     return Scaffold(
       body: Center(

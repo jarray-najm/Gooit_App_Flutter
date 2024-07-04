@@ -14,7 +14,6 @@ class OTPInputView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
     final count = ValueNotifier(6);
     Timer.periodic(const Duration(seconds: 1), (timer) {
       count.value--;

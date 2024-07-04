@@ -19,11 +19,11 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   final ValueNotifier<bool> termsCheck = ValueNotifier(false);
   final TextEditingController userController =
-      TextEditingController(text: "Gooit Admin");
+      TextEditingController();
   final TextEditingController emailController =
-      TextEditingController(text: "gooit.admin@gmail.com");
+      TextEditingController();
   final TextEditingController passwordController =
-      TextEditingController(text: "admin123");
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override

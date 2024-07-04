@@ -49,7 +49,6 @@ class _NewPasswordViewState extends State<NewPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
     return Scaffold(
       appBar: AppBar(),
       body: Form(

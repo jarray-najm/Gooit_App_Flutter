@@ -4,7 +4,6 @@ import 'package:iconly/iconly.dart';
 
 import '../../../../../router/app_routes.dart';
 import '../../../../../utils/animations/fade_in_slide.dart';
-import '../../../../../utils/common/app_colors.dart';
 import '../../../../../utils/common/text_style_ext.dart';
 
 class PasswordChangedView extends StatelessWidget {
